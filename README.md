@@ -28,7 +28,7 @@ Ensure you have the following installed:
 
 ### 1. Clone the Repository
 ```sh
-git clone <your-repository-url>
+git clone https://github.com/shivang-iiitg/logiQ
 cd logiQ
 ```
 
