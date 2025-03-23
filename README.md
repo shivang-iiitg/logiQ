@@ -41,7 +41,7 @@ mysql -u your_username -p -e "CREATE DATABASE logiq_db;"
 ```
 2. Import the SQL data from the `mySQL/` folder:
 ```sh
-mysql -u your_username -p logiq_db < mySQL/db_dump.sql
+mysql -u your_username -p logiq_db < mySQL/dbms_pro_demo.sql
 ```
 
 ---
