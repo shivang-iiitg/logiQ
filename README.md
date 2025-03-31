@@ -55,6 +55,9 @@ DB_HOST=your_database_host
 DB_USER=your_database_username
 DB_PASSWORD=your_database_password
 DB_NAME=logiq_db
+DB_PORT=3306
+PORT=3000
+JWT_SECRET="Hello World"
 ```
 
 ### 4. Start the Backend Server
