@@ -1,9 +1,21 @@
 import Header from '@/components/customs/Header';
 import { Button } from '@/components/ui/button';
 import Spline from '@splinetool/react-spline';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    const token = localStorage.getItem("token");
+    if (token){
+      navigate("/dashboard");
+    }else{
+      navigate("/auth/login");
+    }
+  }
+
   return (
     <div className="h-screen flex flex-col overflow-hidden select-none">
       <Header />
@@ -14,11 +26,9 @@ function Home() {
           <h1 className="font-mono">Test Your Skills.</h1>
           <h1 className="font-outfit">Rise to the Top.</h1>
 
-          <Link to={"/auth/login"}>
-            <Button className="bg-[#eee5da] cursor-pointer text-[#262424] text-xl py-8 px-10 rounded-lg font-semibold hover:bg-[#d1c9be]">
+            <Button onClick={handleStart} className="bg-[#eee5da] cursor-pointer text-[#262424] text-xl py-8 px-10 rounded-lg font-semibold hover:bg-[#d1c9be]">
               Get Started
             </Button>
-          </Link>
 
         </div>
 

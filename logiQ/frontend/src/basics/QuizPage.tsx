@@ -34,6 +34,10 @@ function QuizPage() {
   const [score, setScore] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
 
+  const shuffleArray = (array: any[]) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
+
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
@@ -41,8 +45,13 @@ function QuizPage() {
         const data = await res.json();
 
         if (res.ok) {
+          const shuffledQuestions = data.questions.map((question: Question) => ({
+            ...question,
+            options: shuffleArray([...question.options]),
+          }));
+  
           setQuiz(data.quiz);
-          setQuestions(data.questions);
+          setQuestions(shuffledQuestions);
         } else {
           setError(data.message || "Failed to load quiz");
         }
@@ -123,7 +132,7 @@ function QuizPage() {
   return (
     <div>
       <Header />
-      <div className="min-h-screen p-6 flex flex-col items-center bg-[#eee5da]">
+      <div className="min-h-screen p-6 select-none flex flex-col items-center bg-[#eee5da]">
         <h1 className="text-3xl font-bold font-quicksand text-[#262424]">{quiz?.title}</h1>
         <p className="text-lg font-quicksand text-gray-700 mt-2">{quiz?.description}</p>
 
@@ -144,7 +153,7 @@ function QuizPage() {
                   return (
                     <button
                       key={option.option_id}
-                      className={`block w-full cursor-pointer font-quicksand text-left p-3 rounded-md transition border-4 ${
+                      className={`block w-full select-none cursor-pointer font-quicksand text-left p-3 rounded-md transition border-4 ${
                         isSelected ? "bg-[#262424] text-white border-black" : "bg-[#f5f3f0] hover:bg-[#dbd8d2]"
                       }`}
                       onClick={() => handleOptionSelect(question.question_id, option.option_id)}

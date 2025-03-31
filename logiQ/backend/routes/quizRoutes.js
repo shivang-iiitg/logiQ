@@ -13,6 +13,26 @@ router.get("/quizzes", async (req, res) => {
   }
 });
 
+router.get("/quizzes/teacher/:id", async (req,res) => {
+  try {
+    const teacherName  = await pool.query("SELECT name FROM teacher WHERE quiz_id = ?", [req.params.id])
+    res.json(teacherName);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching quizzes" });
+  }
+})
+
+router.get("/quizzes/given/:student_id", async(req,res) => {
+  try {
+    const quiz_id = await pool.query("SELECT DISTINCT quiz_id FROM studentquiz WHERE student_id = ?", [req.params.student_id]);
+    res.json({quiz_id});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching quizzes" });
+  }
+});
+
 
 router.get("/quizzes/:id", async (req, res) => {
   try {

@@ -60,7 +60,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen p-6 bg-[#eee5da]">
+    <div className="min-h-screen p-6 select-none bg-[#eee5da]">
       <h1 className="text-3xl font-quicksand font-bold text-[#262424] mb-6 text-start">
         Your current marks are: <span className="text-[#000000]">{userMarks}</span>
       </h1>
